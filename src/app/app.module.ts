@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 //Provider
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { PadronProvider } from '../providers/padron/padron';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     SplashScreen,
     UserServiceProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserServiceProvider
+    UserServiceProvider,
+    PadronProvider
   ]
 })
 export class AppModule {}
