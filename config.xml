@@ -88,5 +88,6 @@
         <variable name="CLIENT_TOKEN" value="395b7564ca1d48ba0ac23584fa691fa0" />
         <variable name="API_VERSION" value="v1.1" />
     </plugin>
+    <plugin name="cordova-plugin-camera" spec="4.0.3" />
     <engine name="android" spec="7.1.4" />
 </widget>

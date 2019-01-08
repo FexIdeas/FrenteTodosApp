@@ -11,12 +11,12 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
   users: any[] = [];
-  persona: any[] = [];
+  persona: any;
 
   constructor(public navCtrl: NavController,
     public userService: UserServiceProvider,
     public padronService: PadronProvider) {
-   
+
   }
 
   ionViewDidLoad(){
@@ -29,18 +29,18 @@ export class HomePage {
       (error) =>{
         console.error(error);
       }
-    ) 
+    )
 
   this.padronService.getPersona(33462776,'M')
       .subscribe(
         (data) => { // Success
           console.log(data);
-          this.persona = data[''];
+          this.persona = data;
         },
         (error) =>{
           console.error(error);
         }
-      ) 
+      )
   }
   logout() {
     console.log('logout');

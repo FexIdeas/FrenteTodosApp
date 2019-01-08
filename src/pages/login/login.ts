@@ -1,30 +1,31 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { HomePage } from '../home/home';
- 
+//import { HomePage } from '../home/home';
+import { UsuarioPage } from '../usuario/usuario';
+
 /**
  * Generated class for the LoginPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
- 
+
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
- 
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
- 
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
     this.login();
   }
- 
+
   login() {
     console.log('login LoginPage');
     (<any>window).AccountKitPlugin.loginWithPhoneNumber({
@@ -33,11 +34,12 @@ export class LoginPage {
       facebookNotificationsEnabled: false
     }, (successdata) => {
       (<any>window).AccountKitPlugin.getAccount((user) => {
-        this.navCtrl.setRoot(HomePage);
+        //this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(UsuarioPage);
       })
       }, (err) => {
         alert(err);
     })
   }
- 
+
 }

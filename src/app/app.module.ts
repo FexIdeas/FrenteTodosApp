@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { UsuarioPage } from '../pages/usuario/usuario';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,12 +17,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { PadronProvider } from '../providers/padron/padron';
 
+import { Camera } from '@ionic-native/camera';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    LoginPage
+    LoginPage,
+    UsuarioPage
   ],
   imports: [
     BrowserModule,
@@ -33,13 +37,15 @@ import { PadronProvider } from '../providers/padron/padron';
     MyApp,
     HomePage,
     ListPage,
-    LoginPage
+    LoginPage,
+    UsuarioPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     UserServiceProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Camera,
     UserServiceProvider,
     PadronProvider
   ]
