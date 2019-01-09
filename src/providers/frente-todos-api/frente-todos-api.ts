@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LoadingController } from "ionic-angular";
 
 /*
   Generated class for the FrenteTodosApiProvider provider.
@@ -9,9 +10,15 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class FrenteTodosApiProvider {
-
-  constructor(public http: HttpClient) {
+  loader: any;
+  constructor(public http: HttpClient,
+    public loadingCtrl: LoadingController) {
     console.log('Hello FrenteTodosApiProvider Provider');
+    this.loader = this.loadingCtrl
+    .create({
+      content: "Por favor espere...",
+      dismissOnPageChange: true
+    });
   }
 
   getPersona(ArgMatricula, ArgSexo) {

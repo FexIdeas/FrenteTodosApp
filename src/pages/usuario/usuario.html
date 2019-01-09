@@ -5,14 +5,8 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>usuario</ion-title>
-  </ion-navbar>
-
+  <ion-navbar> <ion-title>usuario</ion-title> </ion-navbar>
 </ion-header>
-
-
 
 <ion-content padding>
   <form [formGroup]="formGroup" (ngSubmit)="guardar()">
@@ -35,8 +29,6 @@
       <img [src]="foto" *ngIf="foto" />
     </div>
 
-    <div padding>
-      <button ion-button type="submit" block>Guardar</button>
-    </div>
+    <div padding><button ion-button type="submit" block>Guardar</button></div>
   </form>
 </ion-content>
