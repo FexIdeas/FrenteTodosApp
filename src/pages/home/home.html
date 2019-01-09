@@ -14,6 +14,8 @@
     Botones de temporales
   </p>
 
+  <img [src]="foto" *ngIf="foto" />
+
   <button ion-button secondary menuToggle>Toggle Menu</button>
 
   <button ion-button (click)="logout()">Cerrar Sesión</button>

@@ -9,17 +9,9 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="!mostrarResultado">
+  <div *ngIf="mostrarBuscador">
       <form [formGroup]="formGroup" (ngSubmit)="consultar()">
         <ion-list>
-          <!-- <ion-item>
-            <ion-label floating>Apellido *</ion-label>
-            <ion-input type="text" formControlName="apellido"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating>Nombre *</ion-label>
-            <ion-input type="text" formControlName="nombre"></ion-input>
-          </ion-item> -->
           <ion-item>
             <ion-label floating>DNI *</ion-label>
             <ion-input type="number" formControlName="dni"></ion-input>
@@ -39,22 +31,6 @@
       <h2 align="center">{{ personaResultado.TipoMatricula }}: {{ personaResultado.Matricula }}</h2>
       <h3 align="center">{{personaResultado.Apellido}}, {{ personaResultado.Nombre }}</h3>
     <ion-list>
-      <!-- <ion-item>
-        <p>Apellido:</p>
-        <h2>{{ personaResultado.Apellido }}</h2>
-      </ion-item>
-      <ion-item>
-        <p>Nombre:</p>
-        <h2>{{ personaResultado.Nombre }}</h2>
-      </ion-item>
-      <ion-item>
-        <p>Tipo Documento:</p>
-        <h2>{{ personaResultado.TipoMatricula }}</h2>
-      </ion-item>
-      <ion-item>
-        <p>Documento:</p>
-        <h2>{{ personaResultado.Matricula }}</h2>
-      </ion-item> -->
       <ion-item>
         <p>Sexo:</p>
         <h2>{{ personaResultado.Sexo }}</h2>
@@ -73,8 +49,32 @@
       </ion-item>
     </ion-list>
 
-    <button ion-button (click)="volver()">Volver</button>
+    <button ion-button (click)="volverBuscador()">Volver</button>
 
     <button ion-button (click)="marcar()">Marcar que avaló la lista</button>
+  </div>
+  
+  <div *ngIf="mostrarMarcar">
+      <form [formGroup]="formGroupMarcar" (ngSubmit)="guardarMarcar()">
+          <ion-list>
+            <ion-item>
+              <ion-label>Muicipio *</ion-label>
+              <ion-select formControlName="municipio" interface="popover">
+                <ion-option value="1">9 de Julio</ion-option>
+                <ion-option value="2">25 de Mayo</ion-option>
+                <ion-option value="3">Albardon</ion-option>
+                <ion-option value="4">Angaco</ion-option>
+                <ion-option value="5">Pocito</ion-option>
+                <ion-option value="6">Santa Lucia</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Denominación de la Lista *</ion-label>
+              <ion-input type="text" formControlName="lista"></ion-input>
+            </ion-item>
+          </ion-list>
+          <button ion-button (click)="volverResultado()">Volver</button>
+          <button ion-button type="submit">Guardar</button>
+        </form>
   </div>
 </ion-content>

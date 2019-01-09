@@ -19,7 +19,10 @@ import { ToastController } from "ionic-angular";
 })
 export class AvalesPage {
   private formGroup: FormGroup;
+  private formGroupMarcar: FormGroup;
+  public mostrarBuscador: boolean = true;
   public mostrarResultado: boolean = false;
+  public mostrarMarcar: boolean = false;
   public personaResultado: any;
 
   constructor(
@@ -30,6 +33,7 @@ export class AvalesPage {
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController
   ) {
+
     this.formGroup = this.formBuilder.group({
       dni: [
         "",
@@ -40,6 +44,12 @@ export class AvalesPage {
         ])
       ],
       sexo: ["", Validators.compose([Validators.required])]
+    });
+
+
+    this.formGroupMarcar = this.formBuilder.group({
+      municipio: ["", Validators.compose([Validators.required])],
+      lista: ["", Validators.compose([Validators.required])]
     });
   }
 
@@ -55,41 +65,60 @@ export class AvalesPage {
         position: "top"
       });
       toast.present();
-    }else{
+    } else {
 
       const loader = this.loadingCtrl
-      .create({
-        content: "Por favor espere...",
-        dismissOnPageChange: true
-      });
+        .create({
+          content: "Por favor espere...",
+          dismissOnPageChange: true
+        });
       loader.present();
       this.frenteTodosApiService.getPersona(this.formGroup.controls["dni"].value, this.formGroup.controls["sexo"].value)
-      .subscribe(
-        (data) => { // Success
-          console.log(data);
-          loader.dismiss();
-          this.personaResultado = data;
-          this.mostrarResultado = true;
-        },
-        (error) =>{
-          loader.dismiss();
-          console.error(error);
-          let toast = this.toastCtrl.create({
-            message: "No está en el padrón. Verifique si los datos son correctos",
-            duration: 3000,
-            position: "top"
-          });
-          toast.present();
-        }
-      )
+        .subscribe(
+          (data) => { // Success
+            console.log(data);
+            loader.dismiss();
+            this.personaResultado = data;
+            this.mostrarBuscador = false;
+            this.mostrarResultado = true;
+            this.mostrarMarcar = false;
+          },
+          (error) => {
+            loader.dismiss();
+            console.error(error);
+            let toast = this.toastCtrl.create({
+              message: "No está en el padrón. Verifique si los datos son correctos",
+              duration: 3000,
+              position: "top"
+            });
+            toast.present();
+          }
+        )
     }
   }
 
-  volver() {
+  volverBuscador() {
+    this.mostrarBuscador = true;
     this.mostrarResultado = false;
+    this.mostrarMarcar = false;
   }
 
   marcar() {
+    this.mostrarBuscador = false;
+    this.mostrarResultado = false;
+    this.mostrarMarcar = true;
+  }
 
+  volverResultado() {
+    this.mostrarBuscador = false;
+    this.mostrarResultado = true;
+    this.mostrarMarcar = false;
+  }
+
+  guardarMarcar() {
+    console.log(this.formGroupMarcar.valid);
+    if (this.formGroupMarcar.valid) {
+      console.log("Guardado" + this.formGroupMarcar.controls["municipio"].value + " " + this.formGroupMarcar.controls["lista"].value)
+    }
   }
 }

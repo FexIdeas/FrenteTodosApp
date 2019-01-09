@@ -25,18 +25,8 @@ export class FrenteTodosApiProvider {
     return this.http.get('http://api.economiayciencia.com/api/Padrons?matricula=' + ArgMatricula + '&sexo=' + ArgSexo);
   }
 
-  postTestServicio(postData) {
-    let options = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    return new Promise(resolve => {
-      this.http.post('http://api.economiayciencia.com/api/TestServicios', JSON.stringify(postData), options)
-        .subscribe(data => {
-          resolve(data);
-        });
-    });
+  getUsuarioApp(ArgUsuarioAppId) {
+    return this.http.get('http://api.economiayciencia.com/api/UsuariosApp/'+ ArgUsuarioAppId);
   }
 
   postUsuarioApp(postData) {
