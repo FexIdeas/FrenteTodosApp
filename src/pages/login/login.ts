@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 //import { HomePage } from '../home/home';
 import { UsuarioPage } from '../usuario/usuario';
 
@@ -18,7 +18,7 @@ import { UsuarioPage } from '../usuario/usuario';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -35,6 +35,8 @@ export class LoginPage {
     }, (successdata) => {
       (<any>window).AccountKitPlugin.getAccount((user) => {
         //this.navCtrl.setRoot(HomePage);
+        this.storage.set('celular', user.phoneNumber);
+        this.storage.set('usuarioFB', user);
         this.navCtrl.setRoot(UsuarioPage);
       })
       }, (err) => {

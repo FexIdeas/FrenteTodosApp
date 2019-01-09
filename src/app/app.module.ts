@@ -14,10 +14,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 
 //Provider
-import { UserServiceProvider } from '../providers/user-service/user-service';
-import { PadronProvider } from '../providers/padron/padron';
+import { FrenteTodosApiProvider } from '../providers/frente-todos-api/frente-todos-api';
 
+//Ionic
 import { Camera } from '@ionic-native/camera';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { Camera } from '@ionic-native/camera';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,11 +45,9 @@ import { Camera } from '@ionic-native/camera';
   providers: [
     StatusBar,
     SplashScreen,
-    UserServiceProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     Camera,
-    UserServiceProvider,
-    PadronProvider
+    FrenteTodosApiProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
