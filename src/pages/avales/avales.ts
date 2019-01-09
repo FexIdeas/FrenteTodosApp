@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { FrenteTodosApiProvider } from "../../providers/frente-todos-api/frente-todos-api";
 import { LoadingController } from "ionic-angular";
+import { ToastController } from "ionic-angular";
 
 /**
  * Generated class for the AvalesPage page.
@@ -26,7 +27,8 @@ export class AvalesPage {
     public navParams: NavParams,
     private formBuilder: FormBuilder,
     public frenteTodosApiService: FrenteTodosApiProvider,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
   ) {
     this.formGroup = this.formBuilder.group({
       dni: [
@@ -46,7 +48,15 @@ export class AvalesPage {
   }
 
   consultar() {
-    if (this.formGroup.valid) {
+    if (!this.formGroup.valid) {
+      let toast = this.toastCtrl.create({
+        message: "Por Favor Completar Los Datos Obligatorios",
+        duration: 3000,
+        position: "top"
+      });
+      toast.present();
+    }else{
+
       const loader = this.loadingCtrl
       .create({
         content: "Por favor espere...",
@@ -62,7 +72,14 @@ export class AvalesPage {
           this.mostrarResultado = true;
         },
         (error) =>{
+          loader.dismiss();
           console.error(error);
+          let toast = this.toastCtrl.create({
+            message: "No está en el padrón. Verifique si los datos son correctos",
+            duration: 3000,
+            position: "top"
+          });
+          toast.present();
         }
       )
     }
