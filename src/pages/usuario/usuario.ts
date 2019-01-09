@@ -87,6 +87,7 @@ export class UsuarioPage {
       }
       let response = this.frenteTodosApiService.postUsuarioApp(postData);
       console.log(response);
+      this.storage.set('usuarioApp', postData);
     }
 
     // this.storage.get('celular').then((val) => {
