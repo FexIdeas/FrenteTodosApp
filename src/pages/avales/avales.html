@@ -10,26 +10,32 @@
 
 <ion-content padding>
   <div *ngIf="mostrarBuscador">
-      <form [formGroup]="formGroup" (ngSubmit)="consultar()">
-        <ion-list>
-          <ion-item>
-            <ion-label floating>DNI *</ion-label>
-            <ion-input type="number" formControlName="dni"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>Sexo *</ion-label>
-            <ion-select formControlName="sexo" interface="popover">
-              <ion-option value="F">Femenino</ion-option>
-              <ion-option value="M">Masculino</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <div padding><button ion-button type="submit" block>Consultar</button></div>
-      </form>
+    <form [formGroup]="formGroup" (ngSubmit)="consultar()">
+      <ion-list>
+        <ion-item>
+          <ion-label floating>DNI *</ion-label>
+          <ion-input type="number" formControlName="dni"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Sexo *</ion-label>
+          <ion-select formControlName="sexo" interface="popover">
+            <ion-option value="F">Femenino</ion-option>
+            <ion-option value="M">Masculino</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <div padding>
+        <button ion-button type="submit" block>Consultar</button>
+      </div>
+    </form>
   </div>
   <div *ngIf="mostrarResultado">
-      <h2 align="center">{{ personaResultado.TipoMatricula }}: {{ personaResultado.Matricula }}</h2>
-      <h3 align="center">{{personaResultado.Apellido}}, {{ personaResultado.Nombre }}</h3>
+    <h2 align="center">
+      {{ personaResultado.TipoMatricula }}: {{ personaResultado.Matricula }}
+    </h2>
+    <h3 align="center">
+      {{ personaResultado.Apellido }}, {{ personaResultado.Nombre }}
+    </h3>
     <ion-list>
       <ion-item>
         <p>Sexo:</p>
@@ -53,28 +59,28 @@
 
     <button ion-button (click)="marcar()">Marcar que avaló la lista</button>
   </div>
-  
+
   <div *ngIf="mostrarMarcar">
-      <form [formGroup]="formGroupMarcar" (ngSubmit)="guardarMarcar()">
-          <ion-list>
-            <ion-item>
-              <ion-label>Muicipio *</ion-label>
-              <ion-select formControlName="municipio" interface="popover">
-                <ion-option value="1">9 de Julio</ion-option>
-                <ion-option value="2">25 de Mayo</ion-option>
-                <ion-option value="3">Albardon</ion-option>
-                <ion-option value="4">Angaco</ion-option>
-                <ion-option value="5">Pocito</ion-option>
-                <ion-option value="6">Santa Lucia</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label floating>Denominación de la Lista *</ion-label>
-              <ion-input type="text" formControlName="lista"></ion-input>
-            </ion-item>
-          </ion-list>
-          <button ion-button (click)="volverResultado()">Volver</button>
-          <button ion-button type="submit">Guardar</button>
-        </form>
+    <form [formGroup]="formGroupMarcar" (ngSubmit)="guardarMarcar()">
+      <ion-list>
+        <ion-item>
+          <ion-label>Muicipio *</ion-label>
+          <ion-select formControlName="municipio" interface="popover">
+            <ion-option value="1">9 de Julio</ion-option>
+            <ion-option value="2">25 de Mayo</ion-option>
+            <ion-option value="3">Albardon</ion-option>
+            <ion-option value="4">Angaco</ion-option>
+            <ion-option value="5">Pocito</ion-option>
+            <ion-option value="6">Santa Lucia</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Denominación de la Lista *</ion-label>
+          <ion-input type="text" formControlName="lista"></ion-input>
+        </ion-item>
+      </ion-list>
+      <button ion-button (click)="volverResultado()">Volver</button>
+      <button ion-button type="submit">Guardar</button>
+    </form>
   </div>
 </ion-content>

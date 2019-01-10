@@ -4,6 +4,8 @@ import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { FrenteTodosApiProvider } from "../../providers/frente-todos-api/frente-todos-api";
 import { LoadingController } from "ionic-angular";
 import { ToastController } from "ionic-angular";
+import { AlertController } from "ionic-angular";
+import { Storage } from "@ionic/storage";
 
 /**
  * Generated class for the AvalesPage page.
@@ -18,12 +20,13 @@ import { ToastController } from "ionic-angular";
   templateUrl: "avales.html"
 })
 export class AvalesPage {
-  private formGroup: FormGroup;
-  private formGroupMarcar: FormGroup;
+  public formGroup: FormGroup;
+  public formGroupMarcar: FormGroup;
   public mostrarBuscador: boolean = true;
   public mostrarResultado: boolean = false;
   public mostrarMarcar: boolean = false;
   public personaResultado: any;
+  public usuarioApp: any;
 
   constructor(
     public navCtrl: NavController,
@@ -31,9 +34,10 @@ export class AvalesPage {
     private formBuilder: FormBuilder,
     public frenteTodosApiService: FrenteTodosApiProvider,
     public loadingCtrl: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
+    private storage: Storage
   ) {
-
     this.formGroup = this.formBuilder.group({
       dni: [
         "",
@@ -46,7 +50,6 @@ export class AvalesPage {
       sexo: ["", Validators.compose([Validators.required])]
     });
 
-
     this.formGroupMarcar = this.formBuilder.group({
       municipio: ["", Validators.compose([Validators.required])],
       lista: ["", Validators.compose([Validators.required])]
@@ -55,27 +58,36 @@ export class AvalesPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad AvalesPage");
+    this.storage.get("usuarioApp").then(val => {
+      this.usuarioApp = val;
+    });
+    this.storage.get("celular").then(val => {
+      console.dir(val);
+    });
   }
 
   consultar() {
     if (!this.formGroup.valid) {
       let toast = this.toastCtrl.create({
-        message: "Por Favor Completar Los Datos Obligatorios",
+        message: "Por favor completar los datos obligatorios",
         duration: 3000,
         position: "top"
       });
       toast.present();
     } else {
-
-      const loader = this.loadingCtrl
-        .create({
-          content: "Por favor espere...",
-          dismissOnPageChange: true
-        });
+      const loader = this.loadingCtrl.create({
+        content: "Por favor espere...",
+        dismissOnPageChange: true
+      });
       loader.present();
-      this.frenteTodosApiService.getPersona(this.formGroup.controls["dni"].value, this.formGroup.controls["sexo"].value)
+      this.frenteTodosApiService
+        .getPersona(
+          this.formGroup.controls["dni"].value,
+          this.formGroup.controls["sexo"].value
+        )
         .subscribe(
-          (data) => { // Success
+          data => {
+            // Success
             console.log(data);
             loader.dismiss();
             this.personaResultado = data;
@@ -83,17 +95,18 @@ export class AvalesPage {
             this.mostrarResultado = true;
             this.mostrarMarcar = false;
           },
-          (error) => {
+          error => {
             loader.dismiss();
             console.error(error);
             let toast = this.toastCtrl.create({
-              message: "No está en el padrón. Verifique si los datos son correctos",
+              message:
+                "No está en el padrón. Verifique si los datos son correctos",
               duration: 3000,
               position: "top"
             });
             toast.present();
           }
-        )
+        );
     }
   }
 
@@ -116,9 +129,62 @@ export class AvalesPage {
   }
 
   guardarMarcar() {
-    console.log(this.formGroupMarcar.valid);
-    if (this.formGroupMarcar.valid) {
-      console.log("Guardado" + this.formGroupMarcar.controls["municipio"].value + " " + this.formGroupMarcar.controls["lista"].value)
+    if (!this.formGroupMarcar.valid) {
+      let toast = this.toastCtrl.create({
+        message: "Por favor completar los datos obligatorios",
+        duration: 3000,
+        position: "top"
+      });
+      toast.present();
+    } else {
+      const loader = this.loadingCtrl.create({
+        content: "Por favor espere...",
+        dismissOnPageChange: true
+      });
+      loader.present();
+
+      console.log(this.usuarioApp);
+      let postData = {
+        padronID: this.personaResultado.ID,
+        municipioID: this.formGroupMarcar.controls["municipio"].value,
+        lista: this.formGroupMarcar.controls["lista"].value,
+        usuarioAppIDAlta: this.usuarioApp.ID
+      };
+
+      this.frenteTodosApiService.postAval(postData).then(
+        data => {
+          // Success
+          loader.dismiss();
+          this.presentAlert();
+        },
+        error => {
+          loader.dismiss();
+          console.error(error);
+        }
+      );
     }
+  }
+
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: "Aval",
+      subTitle: "Guardado correctamente.",
+      buttons: [
+        {
+          text: "Ok",
+          handler: () => {
+            // user has clicked the alert button
+            // begin the alert's dismiss transition
+            let navTransition = alert.dismiss();
+
+            navTransition.then(() => {
+              this.navCtrl.pop();
+            });
+            return false;
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

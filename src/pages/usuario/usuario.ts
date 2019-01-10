@@ -46,9 +46,9 @@ export class UsuarioPage {
           Validators.maxLength(8)
         ])
       ],
-      juntaDepartamental: ["", Validators.compose([Validators.required])],
+      juntaDepartamental: ["", Validators.compose([Validators.required])]
     });
-    
+
     this.storage.get("celular").then(val => {
       this.celular = val;
     });
@@ -60,7 +60,7 @@ export class UsuarioPage {
 
   takePhoto() {
     const options: CameraOptions = {
-      quality: 50,
+      quality: 25,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -81,23 +81,23 @@ export class UsuarioPage {
   guardar() {
     if (!this.formGroup.valid || this.foto == null) {
       let toast = this.toastCtrl.create({
-        message: "Por Favor Completar Los Datos Obligatorios",
+        message: "Por favor completar los datos obligatorios",
         duration: 3000,
         position: "top"
       });
       toast.present();
     } else {
-      const loader = this.loadingCtrl
-        .create({
-          content: "Por favor espere...",
-          dismissOnPageChange: true
-        });
-        loader.present();
+      const loader = this.loadingCtrl.create({
+        content: "Por favor espere...",
+        dismissOnPageChange: true
+      });
+      loader.present();
       let postData = {
         Apellido: this.formGroup.controls["apellido"].value,
         Nombre: this.formGroup.controls["nombre"].value,
         DNI: this.formGroup.controls["dni"].value,
-        juntaDepartamentalID: this.formGroup.controls["juntaDepartamental"].value,
+        juntaDepartamentalID: this.formGroup.controls["juntaDepartamental"]
+          .value,
         Celular: this.celular,
         Foto: this.foto
       };
@@ -105,7 +105,7 @@ export class UsuarioPage {
       this.frenteTodosApiService.postUsuarioApp(postData).then(
         data => {
           // Success
-          this.storage.set("usuarioApp", postData);
+          this.storage.set("usuarioApp", data["usuarioApp"]);
           this.navCtrl.setRoot(HomePage);
           loader.dismiss();
         },

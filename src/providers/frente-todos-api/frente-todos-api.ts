@@ -24,7 +24,20 @@ export class FrenteTodosApiProvider {
   getPersona(ArgMatricula, ArgSexo) {
     return this.http.get('http://api.economiayciencia.com/api/Padrons?matricula=' + ArgMatricula + '&sexo=' + ArgSexo);
   }
-
+  postAval(postData) {
+    let options = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    return new Promise(resolve => {
+      this.http.post('http://api.economiayciencia.com/api/Aval', JSON.stringify(postData), options)
+        .subscribe(data => {
+          console.dir(data);
+          resolve(data);
+        });
+    });
+  }
   getUsuarioApp(ArgUsuarioAppId) {
     return this.http.get('http://api.economiayciencia.com/api/UsuariosApp/'+ ArgUsuarioAppId);
   }

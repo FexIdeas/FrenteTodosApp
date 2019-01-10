@@ -34,7 +34,10 @@ import { IonicStorageModule } from '@ionic/storage';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot({
+      name: '__frenteTodosDB',
+         driverOrder: ['sqlite']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

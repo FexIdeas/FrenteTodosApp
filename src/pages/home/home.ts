@@ -1,57 +1,40 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+import { Component } from "@angular/core";
+import { NavController } from "ionic-angular";
+import { LoginPage } from "../login/login";
 import { FrenteTodosApiProvider } from "../../providers/frente-todos-api/frente-todos-api";
+import { Storage } from "@ionic/storage";
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: "page-home",
+  templateUrl: "home.html"
 })
 export class HomePage {
-
   users: any[] = [];
   persona: any;
   foto: any = null;
+  celular: any;
 
-  constructor(public navCtrl: NavController,
-    public frenteTodosApiService: FrenteTodosApiProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public frenteTodosApiService: FrenteTodosApiProvider,
+    private storage: Storage
+  ) {}
 
-  }
-
-  ionViewDidLoad(){
-  //   this.userService.getUsers()
-  //   .subscribe(
-  //     (data) => { // Success
-  //       console.log(data);
-  //       this.users = data['results'];
-  //     },
-  //     (error) =>{
-  //       console.error(error);
-  //     }
-  //   )
-
-  // this.padronService.getPersona(33462776,'M')
-  //     .subscribe(
-  //       (data) => { // Success
-  //         console.log(data);
-  //         this.persona = data;
-  //       },
-  //       (error) =>{
-  //         console.error(error);
-  //       }
-  //     )
-  this.frenteTodosApiService.getUsuarioApp(1) 
-  .subscribe(
-    (data) => { // Success
-      this.foto = data['Foto'];
-    },
-    (error) =>{
-    }
-  );
+  ionViewDidLoad() {
+    this.frenteTodosApiService.getUsuarioApp(1).subscribe(
+      data => {
+        // Success
+        this.foto = data["Foto"];
+      },
+      error => {}
+    );
+    this.storage.get("celular").then(val => {
+      this.celular = val;
+    });
   }
   logout() {
-    console.log('logout');
-    (<any>window).AccountKitPlugin.logout()
+    console.log("logout");
+    (<any>window).AccountKitPlugin.logout();
     this.navCtrl.setRoot(LoginPage);
   }
 }
