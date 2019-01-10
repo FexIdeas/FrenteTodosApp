@@ -45,9 +45,10 @@ export class UsuarioPage {
           Validators.minLength(7),
           Validators.maxLength(8)
         ])
-      ]
+      ],
+      juntaDepartamental: ["", Validators.compose([Validators.required])],
     });
-
+    
     this.storage.get("celular").then(val => {
       this.celular = val;
     });
@@ -96,6 +97,7 @@ export class UsuarioPage {
         Apellido: this.formGroup.controls["apellido"].value,
         Nombre: this.formGroup.controls["nombre"].value,
         DNI: this.formGroup.controls["dni"].value,
+        juntaDepartamentalID: this.formGroup.controls["juntaDepartamental"].value,
         Celular: this.celular,
         Foto: this.foto
       };

@@ -5,23 +5,52 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar> <ion-title>usuario</ion-title> </ion-navbar>
+  <ion-navbar>
+    <ion-title>usuario</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <form [formGroup]="formGroup" (ngSubmit)="guardar()">
     <ion-list>
       <ion-item>
-        <ion-label floating>Apellido *</ion-label>
-        <ion-input type="text" formControlName="apellido"></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-label floating>Nombre *</ion-label>
         <ion-input type="text" formControlName="nombre"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label floating>Apellido *</ion-label>
+        <ion-input type="text" formControlName="apellido"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label floating>DNI *</ion-label>
         <ion-input type="number" formControlName="dni"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Junta Departamental *</ion-label>
+        <ion-select formControlName="juntaDepartamental" interface="popover">
+          <ion-option value="1">Junta Capital Centro</ion-option>
+          <ion-option value="2">Junta Capital Concepcion</ion-option>
+          <ion-option value="3">Junta Capital Desamparados</ion-option>
+          <ion-option value="4">Junta Capital Trinidad</ion-option>
+          <ion-option value="5">Junta Santa Lucia</ion-option>
+          <ion-option value="6">Junta Chimbas</ion-option>
+          <ion-option value="7">Junta Rivadavia</ion-option>
+          <ion-option value="8">Junta Zonda</ion-option>
+          <ion-option value="9">Junta Rawson</ion-option>
+          <ion-option value="10">Junta 9 de Julio</ion-option>
+          <ion-option value="11">Junta San Martin</ion-option>
+          <ion-option value="12">Junta Angaco</ion-option>
+          <ion-option value="13">Junta Albardon</ion-option>
+          <ion-option value="14">Junta Ullum</ion-option>
+          <ion-option value="15">Junta Pocito</ion-option>
+          <ion-option value="16">Junta Sarmiento</ion-option>
+          <ion-option value="17">Junta 25 de Mayo</ion-option>
+          <ion-option value="18">Junta Caucete</ion-option>
+          <ion-option value="19">Junta Valle Fertil</ion-option>
+          <ion-option value="20">Junta Jachal</ion-option>
+          <ion-option value="21">Junta Iglesia</ion-option>
+          <ion-option value="22">Junta Calingasta</ion-option>
+        </ion-select>
       </ion-item>
     </ion-list>
     <div padding>
