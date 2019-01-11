@@ -88,7 +88,6 @@ export class AvalesPage {
         .subscribe(
           data => {
             // Success
-            console.log(data);
             loader.dismiss();
             this.personaResultado = data;
             this.mostrarBuscador = false;
@@ -143,14 +142,13 @@ export class AvalesPage {
       });
       loader.present();
 
-      console.log(this.usuarioApp);
       let postData = {
-        padronID: this.personaResultado.ID,
+        padronID: this.personaResultado.Persona.ID,
         municipioID: this.formGroupMarcar.controls["municipio"].value,
         lista: this.formGroupMarcar.controls["lista"].value,
         usuarioAppIDAlta: this.usuarioApp.ID
       };
-
+        console.log(postData);
       this.frenteTodosApiService.postAval(postData).then(
         data => {
           // Success
@@ -187,4 +185,6 @@ export class AvalesPage {
     });
     alert.present();
   }
+
+  
 }

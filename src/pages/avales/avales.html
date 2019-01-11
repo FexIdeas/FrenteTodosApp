@@ -5,15 +5,21 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar> <ion-title>avales</ion-title> </ion-navbar>
+  <ion-navbar>
+    <ion-title>Avales</ion-title>
+  </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <div *ngIf="mostrarBuscador">
     <form [formGroup]="formGroup" (ngSubmit)="consultar()">
+      <div padding>
+        <h4>Titulo</h4>
+        <span>Introducción</span>
+      </div>
       <ion-list>
         <ion-item>
-          <ion-label floating>DNI *</ion-label>
+          <ion-label>DNI *</ion-label>
           <ion-input type="number" formControlName="dni"></ion-input>
         </ion-item>
         <ion-item>
@@ -23,64 +29,90 @@
             <ion-option value="M">Masculino</ion-option>
           </ion-select>
         </ion-item>
+        <div padding>
+          <button ion-button type="submit" icon-end float-right>Consultar<ion-icon name="search"></ion-icon></button>
+        </div>
       </ion-list>
-      <div padding>
-        <button ion-button type="submit" block>Consultar</button>
-      </div>
     </form>
   </div>
   <div *ngIf="mostrarResultado">
     <h2 align="center">
-      {{ personaResultado.TipoMatricula }}: {{ personaResultado.Matricula }}
+      {{ personaResultado.Persona.TipoMatricula }}: {{ personaResultado.Persona.Matricula }}
     </h2>
     <h3 align="center">
-      {{ personaResultado.Apellido }}, {{ personaResultado.Nombre }}
+      {{ personaResultado.Persona.Apellido }}, {{ personaResultado.Persona.Nombre }}
     </h3>
     <ion-list>
       <ion-item>
         <p>Sexo:</p>
-        <h2>{{ personaResultado.Sexo }}</h2>
+        <h2>{{ personaResultado.Persona.Sexo }}</h2>
       </ion-item>
       <ion-item>
         <p>Domicilio:</p>
-        <h2>{{ personaResultado.Domicilio }}</h2>
+        <h2>{{ personaResultado.Persona.Domicilio }}</h2>
       </ion-item>
       <ion-item>
         <p>Clase:</p>
-        <h2>{{ personaResultado.Clase }}</h2>
+        <h2>{{ personaResultado.Persona.Clase }}</h2>
       </ion-item>
       <ion-item>
-        <p>Departamento:</p>
-        <h2>Pendiente</h2>
+        <p>Municipio:</p>
+        <h2>{{ personaResultado.Municipio }}</h2>
       </ion-item>
+      <div *ngIf="!personaResultado.Persona.EsAfiliado" padding style="color:red">
+        <p>La persona figura en el padrón, pero no es afiliado a ningún partido.</p>
+      </div>
+      <div *ngIf="personaResultado.Persona.AvalFechaAlta" padding style="color:red">
+        <p>El aval ya fue cargado.</p>
+      </div>
+      <div padding>
+        <button ion-button (click)="volverBuscador()" color="light" icon-start><ion-icon name="arrow-round-back"></ion-icon>Volver</button>
+        <button ion-button (click)="marcar()" icon-end float-right *ngIf="personaResultado.Persona.EsAfiliado && !personaResultado.Persona.AvalFechaAlta">avaló una lista<ion-icon name="arrow-round-forward"></ion-icon></button>
+      </div>
     </ion-list>
 
-    <button ion-button (click)="volverBuscador()">Volver</button>
-
-    <button ion-button (click)="marcar()">Marcar que avaló la lista</button>
   </div>
 
   <div *ngIf="mostrarMarcar">
     <form [formGroup]="formGroupMarcar" (ngSubmit)="guardarMarcar()">
+        <div padding>
+          <h4>Titulo</h4>
+          <span>Introducción</span>
+        </div>
       <ion-list>
         <ion-item>
           <ion-label>Muicipio *</ion-label>
           <ion-select formControlName="municipio" interface="popover">
-            <ion-option value="1">9 de Julio</ion-option>
-            <ion-option value="2">25 de Mayo</ion-option>
-            <ion-option value="3">Albardon</ion-option>
-            <ion-option value="4">Angaco</ion-option>
-            <ion-option value="5">Pocito</ion-option>
-            <ion-option value="6">Santa Lucia</ion-option>
+            <ion-option value="1">Capital</ion-option>
+            <ion-option value="2">Santa Lucia</ion-option>
+            <ion-option value="3">Chimbas</ion-option>
+            <ion-option value="4">Rivadavia</ion-option>
+            <ion-option value="5">Zonda</ion-option>
+            <ion-option value="6">Rawson</ion-option>
+            <ion-option value="7">9 de Julio</ion-option>
+            <ion-option value="8">San Martin</ion-option>
+            <ion-option value="9">Angaco</ion-option>
+            <ion-option value="10">Albardon</ion-option>
+            <ion-option value="11">Ullum</ion-option>
+            <ion-option value="12">Pocito</ion-option>
+            <ion-option value="13">Sarmiento</ion-option>
+            <ion-option value="14">25 de Mayo</ion-option>
+            <ion-option value="15">Caucete</ion-option>
+            <ion-option value="16">Valle Fertil</ion-option>
+            <ion-option value="17">Jachal</ion-option>
+            <ion-option value="18">Iglesia</ion-option>
+            <ion-option value="19">Calingasta</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label floating>Denominación de la Lista *</ion-label>
+          <ion-label>Lista *</ion-label>
           <ion-input type="text" formControlName="lista"></ion-input>
         </ion-item>
+        <div padding>
+          <button ion-button (click)="volverResultado()" color="light" icon-start><ion-icon name="arrow-round-back"></ion-icon>Volver</button>
+          <button ion-button type="submit" float-right icon-start><ion-icon name="cloud-upload"></ion-icon>Guardar</button>
+        </div>
       </ion-list>
-      <button ion-button (click)="volverResultado()">Volver</button>
-      <button ion-button type="submit">Guardar</button>
     </form>
   </div>
 </ion-content>

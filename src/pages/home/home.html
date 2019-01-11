@@ -1,18 +1,42 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>TODO: HACER HOME</h3>
+  <!-- {{ celular }} -->
+  <!-- <img [src]="foto" *ngIf="foto" /> -->
+  <br>
+  <img src="../../assets/imgs/logoFrenteTodos.png" width="80%" align="center" />
 
-  <p>Botones de temporales</p>
-  {{ celular }}
-  <img [src]="foto" *ngIf="foto" />
+  <h3>TITULO EJEMPLO</h3>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <p>Texto dentro de un parrafo, esto se utiliza para textos largos que nadie nunca lee</p>
+  <!-- <button ion-button secondary menuToggle>Toggle Menu</button>
 
-  <button ion-button (click)="logout()">Cerrar Sesión</button>
+  <button ion-button (click)="logout()">Cerrar Sesión</button> -->
+  <ion-card (click)="goAvales()">
+    <ion-card-header>
+      <br>
+      Cargar Avales
+    </ion-card-header>
+    <ion-card-content>
+      <br>
+      <p>Consultá el padrón provisorio y de afiliados y cargá los avales que hayas registrado.</p>
+    </ion-card-content>
+  </ion-card>
+  <br>
+  <ion-card>
+    <ion-card-header>
+      Consultar Padrón electoral
+    </ion-card-header>
+    <ion-card-content>
+      <br>
+      <p>Consultá el padrón provisorio y de afiliados y cargá los avales que hayas registrado.</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

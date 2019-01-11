@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { LoginPage } from "../login/login";
+import { AvalesPage } from "../avales/avales";
 import { FrenteTodosApiProvider } from "../../providers/frente-todos-api/frente-todos-api";
 import { Storage } from "@ionic/storage";
 
@@ -18,23 +19,29 @@ export class HomePage {
     public navCtrl: NavController,
     public frenteTodosApiService: FrenteTodosApiProvider,
     private storage: Storage
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
-    this.frenteTodosApiService.getUsuarioApp(1).subscribe(
-      data => {
-        // Success
-        this.foto = data["Foto"];
-      },
-      error => {}
-    );
+    // this.frenteTodosApiService.getUsuarioApp(1).subscribe(
+    //   data => {
+    //     // Success
+    //     this.foto = data["Foto"];
+    //   },
+    //   error => {}
+    // );
     this.storage.get("celular").then(val => {
       this.celular = val;
     });
   }
+
   logout() {
     console.log("logout");
     (<any>window).AccountKitPlugin.logout();
     this.navCtrl.setRoot(LoginPage);
+  }
+
+  goAvales() {
+    this.navCtrl.push(AvalesPage);
+
   }
 }
