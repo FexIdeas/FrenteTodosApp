@@ -14,15 +14,15 @@
   <form [formGroup]="formGroup" (ngSubmit)="guardar()">
     <ion-list>
       <ion-item>
-        <ion-label floating>Nombre *</ion-label>
+        <ion-label>Nombre *</ion-label>
         <ion-input type="text" formControlName="nombre"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Apellido *</ion-label>
+        <ion-label>Apellido *</ion-label>
         <ion-input type="text" formControlName="apellido"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>DNI *</ion-label>
+        <ion-label>DNI *</ion-label>
         <ion-input type="number" formControlName="dni"></ion-input>
       </ion-item>
       <ion-item>
@@ -52,12 +52,15 @@
           <ion-option value="22">Junta Calingasta</ion-option>
         </ion-select>
       </ion-item>
+      <div padding>
+        <button ion-button (click)="takePhoto()" block>Sacate una foto</button>
+        <img [src]="foto" *ngIf="foto; else fotoGenerica" />
+        <ng-template #fotoGenerica>
+        <img src="../../assets/imgs/logo.png" />
+        </ng-template>
+      </div>
+  
+      <div padding><button ion-button type="submit" block>Guardar</button></div>
     </ion-list>
-    <div padding>
-      <button ion-button (click)="takePhoto()" block>Sacate una foto</button>
-      <img [src]="foto" *ngIf="foto" />
-    </div>
-
-    <div padding><button ion-button type="submit" block>Guardar</button></div>
   </form>
 </ion-content>

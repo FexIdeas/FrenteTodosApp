@@ -22,13 +22,13 @@ export class HomePage {
   ) { }
 
   ionViewDidLoad() {
-    // this.frenteTodosApiService.getUsuarioApp(1).subscribe(
-    //   data => {
-    //     // Success
-    //     this.foto = data["Foto"];
-    //   },
-    //   error => {}
-    // );
+    this.frenteTodosApiService.getUsuarioApp(1).subscribe(
+      data => {
+        // Success
+        this.foto = data["Foto"];
+      },
+      error => {}
+    );
     this.storage.get("celular").then(val => {
       this.celular = val;
     });
