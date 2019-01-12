@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import { UsuarioPage } from '../pages/usuario/usuario';
 import { AvalesPage } from '../pages/avales/avales';
 import { MiembrosJuntaPage } from '../pages/miembros-junta/miembros-junta';
+import { ContactoPage } from '../pages/contacto/contacto';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,7 +31,8 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginPage,
     UsuarioPage,
     AvalesPage,
-    MiembrosJuntaPage
+    MiembrosJuntaPage,
+    ContactoPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginPage,
     UsuarioPage,
     AvalesPage,
-    MiembrosJuntaPage
+    MiembrosJuntaPage,
+    ContactoPage
   ],
   providers: [
     StatusBar,

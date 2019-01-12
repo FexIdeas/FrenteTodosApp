@@ -1,9 +1,13 @@
 page-home {
-img{display:block;
-    margin:auto;}
+    .logoFrenteTodos{
+        display:block;
+        margin:auto;}
     ion-card-header{
         background-color:color($colors, primary);
         color: white !important;
     }
     
+    ion-avatar img{
+        object-fit: cover;
+    }
 }
