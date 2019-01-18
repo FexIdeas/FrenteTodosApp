@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -13,48 +13,25 @@
   <br>
   <img class="logoFrenteTodos" src="../../assets/imgs/logoFrenteTodos.png" width="80%" align="center" />
 
-  <h3>TITULO EJEMPLO</h3>
+  <!-- <h3>TITULO EJEMPLO</h3>
 
-  <p>Texto dentro de un parrafo, esto se utiliza para textos largos que nadie nunca lee</p>
+  <p>Texto dentro de un parrafo, esto se utiliza para textos largos que nadie nunca lee</p> -->
   <!-- <button ion-button secondary menuToggle>Toggle Menu</button>
 
   <button ion-button (click)="logout()">Cerrar Sesión</button> -->
 
-  <ion-list>
-    <ion-item >
-      <ion-avatar item-start>
-        <img [src]="foto">
-      </ion-avatar>
-      <h2><strong>Sergio Uñac</strong></h2>
-      <p>Gobernador</p>
-    </ion-item>
-    <ion-item >
-      <ion-avatar item-start>
-        <img [src]="foto">
-      </ion-avatar>
-      <h2><strong>Hector Frias</strong></h2>
-      <p>Equipo Tecnico</p>
-    </ion-item>
-    <ion-item >
-      <ion-avatar item-start>
-        <img [src]="foto">
-      </ion-avatar>
-      <h2><strong>Juan Manuel Ariza</strong></h2>
-      <p>Desarrollador</p>
-    </ion-item>
-  </ion-list>
   <ion-card (click)="goAvales()">
-    <ion-card-header>
+    <ion-card-header class="color-azul">
       <br>
-      Cargar Avales
+      Consulta para Avales
     </ion-card-header>
     <ion-card-content>
       <br>
-      <p>Consultá el padrón provisorio y de afiliados y cargá los avales que hayas registrado.</p>
+      <p>Consultá el padrón provisorio y de afiliados</p>
     </ion-card-content>
   </ion-card>
   <br>
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-header>
       Consultar Padrón electoral
     </ion-card-header>
@@ -62,5 +39,5 @@
       <br>
       <p>Consultá el padrón provisorio y de afiliados y cargá los avales que hayas registrado.</p>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 </ion-content>

@@ -1,7 +1,10 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { Storage } from "@ionic/storage";
-//import { HomePage } from '../home/home';
+import { Market } from '@ionic-native/market';
+import { AppVersion } from '@ionic-native/app-version';
+import { FrenteTodosApiProvider } from "../../providers/frente-todos-api/frente-todos-api";
+import { AlertController } from 'ionic-angular';
 import { UsuarioPage } from "../usuario/usuario";
 import { HomePage } from "../home/home";
 
@@ -21,12 +24,31 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private storage: Storage
-  ) {}
+    private storage: Storage,
+    private market: Market,
+    private appVersion: AppVersion,
+    public alertCtrl: AlertController,
+    public frenteTodosApiService: FrenteTodosApiProvider
+  ) {
+    //TODO: Servicio que consulte version de la app en playstore
+    this.frenteTodosApiService.getUsuarioApp(1).subscribe(
+      data => {
+        // Success    
+        appVersion.getVersionNumber().then(val => {
+          if (val != data) {
+            this.mostrarAvisoActualizar();
+          }
+          else {
+            this.login();
+          }
+        });
+      },
+      error => { }
+    );
+  }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad LoginPage");
-    this.login();
   }
 
   login() {
@@ -55,5 +77,22 @@ export class LoginPage {
         alert(err);
       }
     );
+  }
+
+  mostrarAvisoActualizar() {
+    const confirm = this.alertCtrl.create({
+      title: 'Actualizar App',
+      message: 'Hay una nueva versión de la aplicación, es necesario actualizar.',
+      buttons: [
+        {
+          text: 'Actualizar',
+          handler: () => {
+            console.log('Agree clicked');
+            this.market.open('io.frente.todos');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

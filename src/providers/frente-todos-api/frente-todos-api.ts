@@ -57,5 +57,8 @@ export class FrenteTodosApiProvider {
     });
   }
 
+  getAppVersion() {
+    return this.http.get('http://api.economiayciencia.com/api/Padrons');
+  }
 
 }

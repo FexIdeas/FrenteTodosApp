@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.frente.todos" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Frente Todos</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.100.8:8100" />
+    <description>Aplicación Frente Todos San Juan</description>
+    <author email="frentetodossanjuan@gmail.com" href="https://www.frentetodos.org/">Frente Todos</author>
+    <content original-src="index.html" src="http://192.168.0.14:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -91,5 +91,8 @@
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
     <plugin name="cordova-sqlite-storage" spec="2.6.0" />
     <allow-navigation href="http://192.168.100.8:8100" sessionid="610a41be" />
+    <plugin name="cordova-plugin-market" spec="1.2.0" />
+    <plugin name="cordova-plugin-app-version" spec="0.1.9" />
+    <allow-navigation href="http://192.168.0.14:8100" sessionid="fc94ed8d" />
     <engine name="android" spec="^7.1.4" />
 </widget>

@@ -22,6 +22,8 @@ import { FrenteTodosApiProvider } from '../providers/frente-todos-api/frente-tod
 //Ionic
 import { Camera } from '@ionic-native/camera';
 import { IonicStorageModule } from '@ionic/storage';
+import { Market } from '@ionic-native/market';
+import { AppVersion } from '@ionic-native/app-version';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { IonicStorageModule } from '@ionic/storage';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Camera,
-    FrenteTodosApiProvider
+    FrenteTodosApiProvider,
+    Market,
+    AppVersion,
   ]
 })
 export class AppModule { }

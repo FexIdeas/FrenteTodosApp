@@ -36,10 +36,10 @@
     </form>
   </div>
   <div *ngIf="mostrarResultado">
-    <h2 align="center">
+    <h2 align="center" secondary>
       {{ personaResultado.Persona.TipoMatricula }}: {{ personaResultado.Persona.Matricula }}
     </h2>
-    <h3 align="center">
+    <h3 align="center" secondary>
       {{ personaResultado.Persona.Apellido }}, {{ personaResultado.Persona.Nombre }}
     </h3>
     <ion-list>
@@ -59,15 +59,18 @@
         <p>Municipio:</p>
         <h2>{{ personaResultado.Municipio }}</h2>
       </ion-item>
+      <div *ngIf="personaResultado.Persona.EsAfiliado" padding style="color:#53bb00">
+        <p>La persona es afiliado.</p>
+      </div>
       <div *ngIf="!personaResultado.Persona.EsAfiliado" padding style="color:red">
         <p>La persona figura en el padrón, pero no es afiliado a ningún partido.</p>
       </div>
-      <div *ngIf="personaResultado.Persona.AvalFechaAlta" padding style="color:red">
+      <!-- <div *ngIf="personaResultado.Persona.AvalFechaAlta" padding style="color:red">
         <p>El aval ya fue cargado.</p>
-      </div>
+      </div> -->
       <div padding>
         <button ion-button (click)="volverBuscador()" color="light" icon-start><ion-icon name="arrow-round-back"></ion-icon>Volver</button>
-        <button ion-button (click)="marcar()" icon-end float-right *ngIf="personaResultado.Persona.EsAfiliado && !personaResultado.Persona.AvalFechaAlta">avaló una lista<ion-icon name="arrow-round-forward"></ion-icon></button>
+        <!-- <button ion-button (click)="marcar()" icon-end float-right *ngIf="personaResultado.Persona.EsAfiliado && !personaResultado.Persona.AvalFechaAlta">avaló una lista<ion-icon name="arrow-round-forward"></ion-icon></button> -->
       </div>
     </ion-list>
 

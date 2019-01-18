@@ -88,11 +88,22 @@ export class AvalesPage {
         .subscribe(
           data => {
             // Success
-            loader.dismiss();
-            this.personaResultado = data;
-            this.mostrarBuscador = false;
-            this.mostrarResultado = true;
-            this.mostrarMarcar = false;
+              loader.dismiss();
+            if(data == null){
+              let toast = this.toastCtrl.create({
+                message:
+                  "No está en el padrón. Verifique si los datos son correctos",
+                duration: 3000,
+                position: "top"
+              });
+              toast.present();
+            }else{
+              this.personaResultado = data;
+              this.mostrarBuscador = false;
+              this.mostrarResultado = true;
+              this.mostrarMarcar = false;
+
+            }
           },
           error => {
             loader.dismiss();
